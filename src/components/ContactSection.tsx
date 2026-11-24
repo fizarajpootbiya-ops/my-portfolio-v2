@@ -25,7 +25,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
     }
   }, [selectedService]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrorMessage(null);
 
@@ -48,29 +48,24 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: trimmedName,
-          email: trimmedEmail,
-          service: formData.service,
-          details: trimmedDetails
-        }),
+      const formDataObj = new FormData(e.currentTarget);
+      formDataObj.append("access_key", "22cd95b3-0d8f-47be-9469-e513af5c1a2d");
+      formDataObj.set('message', `Service Requested: ${formData.service}\n\nProject Details:\n${trimmedDetails}`);
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formDataObj
       });
 
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
-        throw new Error(data.message || 'Failed to send email inquiry. Please try again.');
+      if (response.status === 200) {
+        setIsSubmitted(true);
+        e.currentTarget.reset();
+      } else {
+        setErrorMessage("Failed, please try again");
       }
-
-      setIsSubmitted(true);
     } catch (err: any) {
       console.error('Submission error:', err);
-      setErrorMessage(err.message || 'Network error occurred. Please check your connection or contact via WhatsApp/Email directly.');
+      setErrorMessage("Failed, please try again");
     } finally {
       setIsSubmitting(false);
     }
@@ -207,6 +202,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
+                  <input type="hidden" name="access_key" value="22cd95b3-0d8f-47be-9469-e513af5c1a2d" />
+                  <input type="hidden" name="from_name" value="Syeda Zainab SZ Portfolio Inquiry" />
+                  <input type="hidden" name="subject" value={`New message from portfolio (${formData.service})`} />
+
                   {errorMessage && (
                     <div className="p-3.5 rounded-xl bg-red-500/10 border border-red-500/30 flex items-start gap-2.5 text-xs text-red-300">
                       <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
@@ -222,6 +221,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                       </label>
                       <input
                         id="name"
+                        name="name"
                         type="text"
                         required
                         value={formData.name}
@@ -238,6 +238,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                       </label>
                       <input
                         id="email"
+                        name="email"
                         type="email"
                         required
                         value={formData.email}
@@ -255,6 +256,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                     </label>
                     <select
                       id="service"
+                      name="service"
                       value={formData.service}
                       onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                       className="w-full px-3.5 py-2.5 rounded-lg bg-[#071321] border border-[#23364A] text-[#F4F3EA] text-sm focus:outline-none focus:border-[#D6AA3D] transition-colors cursor-pointer"
@@ -275,6 +277,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                     </label>
                     <textarea
                       id="details"
+                      name="message"
                       rows={4}
                       required
                       value={formData.details}

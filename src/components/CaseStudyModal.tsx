@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Project, PROJECTS_DATA } from '../data/portfolioData';
+import { Project, PROJECTS_DATA, PROJECT_MOBILE_PREVIEWS } from '../data/portfolioData';
 import { getCustomScreenshot } from '../utils/screenshotStorage';
 import {
   X,
@@ -514,45 +514,49 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Additional Screenshot Gallery Placeholder */}
+                {/* Additional Screenshot Gallery */}
                 <div className="p-5 rounded-2xl bg-[#071321] border border-[#23364A] space-y-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 text-xs font-semibold text-[#F4F3EA]">
                       <Layers className="w-4 h-4 text-[#D6AA3D]" />
                       <span>Additional Screenshot Gallery</span>
                     </div>
-                    <span className="text-[10px] font-mono text-[#8191A3] uppercase">Inner Pages</span>
+                    <span className="text-[10px] font-mono text-[#D6AA3D] uppercase">Desktop View</span>
                   </div>
                   <p className="text-xs text-[#8191A3] leading-relaxed">
-                    Dedicated gallery slot for secondary layout views, product detail pages, and checkout workflows for {currentProject.title}.
+                    Full-length desktop homepage capture for {currentProject.title}.
                   </p>
-                  <div className="aspect-[16/10] rounded-xl bg-[#0A1828] border border-dashed border-[#23364A] flex flex-col items-center justify-center p-6 text-center group/slot hover:border-[#D6AA3D]/50 transition-colors">
-                    <div className="w-10 h-10 rounded-lg bg-[#071321] border border-[#23364A] flex items-center justify-center text-[#D6AA3D] mb-2">
-                      <Layers className="w-4 h-4" />
-                    </div>
-                    <span className="text-xs font-medium text-[#F4F3EA]">Additional Screenshot Gallery Slot</span>
-                    <span className="text-[11px] text-[#8191A3] mt-1">Secondary viewport captures ready for staging</span>
+                  <div className="aspect-[16/10] rounded-xl overflow-hidden bg-[#071321] border border-[#23364A]">
+                    <img
+                      src={currentProject.defaultImage}
+                      alt={`${currentProject.title} desktop screenshot`}
+                      className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                      referrerPolicy="no-referrer"
+                    />
                   </div>
                 </div>
 
-                {/* Mobile Screenshot Placeholder */}
+                {/* Mobile Screenshot View */}
                 <div className="p-5 rounded-2xl bg-[#071321] border border-[#23364A] space-y-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 text-xs font-semibold text-[#F4F3EA]">
                       <Smartphone className="w-4 h-4 text-[#D6AA3D]" />
                       <span>Mobile Screenshot View</span>
                     </div>
-                    <span className="text-[10px] font-mono text-[#8191A3] uppercase">Smartphone Parity</span>
+                    <span className="text-[10px] font-mono text-[#D6AA3D] uppercase">Smartphone Parity</span>
                   </div>
                   <p className="text-xs text-[#8191A3] leading-relaxed">
-                    Dedicated mobile viewport slot displaying responsive navigation, touch targets, and vertical readability.
+                    Smartphone responsive view and touch layout for {currentProject.title}.
                   </p>
-                  <div className="aspect-[16/10] rounded-xl bg-[#0A1828] border border-dashed border-[#23364A] flex flex-col items-center justify-center p-6 text-center group/slot hover:border-[#D6AA3D]/50 transition-colors">
-                    <div className="w-10 h-10 rounded-lg bg-[#071321] border border-[#23364A] flex items-center justify-center text-[#D6AA3D] mb-2">
-                      <Smartphone className="w-4 h-4" />
-                    </div>
-                    <span className="text-xs font-medium text-[#F4F3EA]">Mobile Screenshot Placeholder</span>
-                    <span className="text-[11px] text-[#8191A3] mt-1">Smartphone responsive views and touch layouts</span>
+                  <div className="aspect-[16/10] rounded-xl overflow-hidden bg-[#071321] border border-[#23364A] flex items-center justify-center p-2">
+                    <img
+                      src={PROJECT_MOBILE_PREVIEWS[currentProject.id]?.src || currentProject.defaultImage}
+                      alt={`${currentProject.title} mobile screenshot`}
+                      className="max-h-full object-contain rounded-lg hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                      referrerPolicy="no-referrer"
+                    />
                   </div>
                 </div>
               </div>

@@ -45,6 +45,7 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({ on
                       src={cert.imageUrl}
                       alt={cert.title}
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
                       referrerPolicy="no-referrer"
                     />
                     <div className="absolute inset-0 bg-[#071321]/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">

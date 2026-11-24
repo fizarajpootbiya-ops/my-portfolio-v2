@@ -96,48 +96,6 @@ export const Hero: React.FC<HeroProps> = ({
                 </div>
               </div>
 
-              {/* Desktop Screen Mockup Frame */}
-              <div
-                onClick={() => onOpenCaseStudy('versatile-pro-junk-solution')}
-                className="group relative rounded-2xl bg-[#0D1E30] p-2.5 sm:p-3 border border-[#23364A] shadow-2xl hover:border-[#D6AA3D]/50 transition-all duration-300 cursor-pointer overflow-hidden"
-              >
-                {/* Browser bar header */}
-                <div className="flex items-center justify-between pb-2 px-2 border-b border-[#23364A]/60 mb-2.5 text-[11px] text-[#8191A3]">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#23364A] group-hover:bg-[#D6AA3D]/70 transition-colors"></span>
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#23364A]"></span>
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#23364A]"></span>
-                  </div>
-                  <div className="px-2.5 py-0.5 rounded bg-[#071321] text-[10px] text-[#8191A3]/80 font-mono tracking-tight">
-                    versatileprojunksolutions.com
-                  </div>
-                  <span className="text-[10px] text-[#D6AA3D] font-medium">LIVE</span>
-                </div>
-
-                {/* Desktop Screenshot */}
-                <div className="relative aspect-video rounded-lg overflow-hidden bg-[#071321]">
-                  <img
-                    src="/assets/aistudio/image_b07112f3.png"
-                    alt="Versatile Pro Junk Solution website redesign preview"
-                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                    referrerPolicy="no-referrer"
-                  />
-                  {/* Subtle scrim overlay on hover */}
-                  <div className="absolute inset-0 bg-[#071321]/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-[#071321]/90 text-xs font-medium text-[#D6AA3D] border border-[#D6AA3D]/40 backdrop-blur-sm">
-                      <span>View Case Study</span>
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </span>
-                  </div>
-                </div>
-
-                {/* Caption below screen */}
-                <div className="flex items-center justify-between pt-2.5 px-1 text-xs text-[#8191A3]">
-                  <span className="text-[#F4F3EA] font-medium">Versatile Pro Junk Solution</span>
-                  <span className="text-[#D6AA3D]">Redesign · Live Site</span>
-                </div>
-              </div>
-
               {/* Floating SZ Brand Element */}
               <div className="absolute -top-4 -right-4 bg-[#0D1E30]/95 backdrop-blur-md px-3 py-2 rounded-xl border border-[#23364A] shadow-xl flex items-center gap-2 z-30">
                 <div className="w-6 h-6 rounded-md bg-[#D6AA3D] text-[#071321] font-bold text-xs flex items-center justify-center">

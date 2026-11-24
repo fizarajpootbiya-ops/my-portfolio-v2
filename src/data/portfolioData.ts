@@ -928,13 +928,13 @@ export const CLIENT_REVIEWS_DATA: ClientFeedbackItem[] = [
 ];
 
 export const PROJECT_MOBILE_PREVIEWS: Record<string, { type: 'video' | 'image'; src: string }> = {
-  'one-desk': {
-    type: 'video',
-    src: '/assets/aistudio/VID-20261115-WA0005_19f7744f.mp4'
-  },
   'practice-work-1': {
     type: 'image',
     src: '/assets/aistudio/image_c2fa290f.png'
+  },
+  'versatile-pro-junk-solution': {
+    type: 'image',
+    src: '/assets/aistudio/image_03eae6e1.png'
   },
   'valhalla-peptides': {
     type: 'image',
@@ -943,6 +943,10 @@ export const PROJECT_MOBILE_PREVIEWS: Record<string, { type: 'video' | 'image'; 
   'rouge-fragrance': {
     type: 'image',
     src: '/assets/aistudio/image_ae14014e.png'
+  },
+  'artplay': {
+    type: 'image',
+    src: '/assets/aistudio/image_abee3830.png'
   },
   'nkd': {
     type: 'image',
@@ -959,6 +963,10 @@ export const PROJECT_MOBILE_PREVIEWS: Record<string, { type: 'video' | 'image'; 
   'black-rose-archive': {
     type: 'image',
     src: '/assets/aistudio/image_abee3830.png'
+  },
+  'pinnacle-electrical-services': {
+    type: 'image',
+    src: '/assets/aistudio/image_c2fa290f.png'
   }
 };
 
