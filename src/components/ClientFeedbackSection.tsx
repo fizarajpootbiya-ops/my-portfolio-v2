@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { CLIENT_REVIEWS_DATA } from '../data/portfolioData';
 import { ArrowLeft, ArrowRight, Quote, CheckCircle2, ArrowUpRight } from 'lucide-react';
 
@@ -8,40 +8,6 @@ interface ClientFeedbackSectionProps {
 
 export const ClientFeedbackSection: React.FC<ClientFeedbackSectionProps> = ({ onOpenCaseStudy }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [isPaused, setIsPaused] = useState(false);
-  const touchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Seamless continuous auto-scroll loop with triple duplication
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    let animationFrameId: number;
-    let scrollSpeed = 0.55; // Smooth, slow professional speed
-
-    // Initialize scroll position to the middle set for bidirectional infinite loop support
-    if (container.scrollLeft === 0) {
-      container.scrollLeft = container.scrollWidth / 3;
-    }
-
-    const step = () => {
-      if (!isPaused && container) {
-        container.scrollLeft += scrollSpeed;
-        const singleSetWidth = container.scrollWidth / 3;
-
-        // Seamless wrap around with zero jump
-        if (container.scrollLeft >= singleSetWidth * 2) {
-          container.scrollLeft -= singleSetWidth;
-        } else if (container.scrollLeft <= 5) {
-          container.scrollLeft += singleSetWidth;
-        }
-      }
-      animationFrameId = requestAnimationFrame(step);
-    };
-
-    animationFrameId = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [isPaused]);
 
   const scrollManual = (direction: 'left' | 'right') => {
     const container = scrollContainerRef.current;
@@ -53,26 +19,8 @@ export const ClientFeedbackSection: React.FC<ClientFeedbackSectionProps> = ({ on
     });
   };
 
-  const handleTouchStart = () => {
-    setIsPaused(true);
-    if (touchTimeoutRef.current) clearTimeout(touchTimeoutRef.current);
-  };
-
-  const handleTouchEnd = () => {
-    // Resume auto-scroll 1.5s after touch interaction ends
-    if (touchTimeoutRef.current) clearTimeout(touchTimeoutRef.current);
-    touchTimeoutRef.current = setTimeout(() => {
-      setIsPaused(false);
-    }, 1500);
-  };
-
   return (
-    <section
-      id="reviews"
-      className="py-24 md:py-32 bg-[#071321] border-t border-[#23364A]/60 relative overflow-hidden"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
+    <section id="reviews" className="py-24 md:py-32 bg-[#071321] border-t border-[#23364A]/60 relative overflow-hidden">
       {/* Subtle Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#D6AA3D]/3 rounded-full blur-[150px] pointer-events-none" />
 
@@ -120,15 +68,12 @@ export const ClientFeedbackSection: React.FC<ClientFeedbackSectionProps> = ({ on
         {/* Horizontal Carousel Container */}
         <div
           ref={scrollContainerRef}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
           className="flex gap-6 overflow-x-auto pb-6 pt-2 scrollbar-none snap-x snap-mandatory focus:outline-none"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          {/* Triple duplication for seamless infinite looping */}
-          {[...CLIENT_REVIEWS_DATA, ...CLIENT_REVIEWS_DATA, ...CLIENT_REVIEWS_DATA].map((review, index) => (
+          {CLIENT_REVIEWS_DATA.map((review) => (
             <div
-              key={`${review.id}-${index}`}
+              key={review.id}
               className="w-[380px] sm:w-[440px] shrink-0 snap-start rounded-3xl bg-[#0D1E30] border border-[#23364A] p-7 sm:p-8 flex flex-col justify-between shadow-xl hover:border-[#D6AA3D]/50 transition-all duration-300 relative group"
             >
               {/* Top Accent Icon & Project Badge */}
@@ -183,7 +128,7 @@ export const ClientFeedbackSection: React.FC<ClientFeedbackSectionProps> = ({ on
 
         {/* Bottom Helper Note */}
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#8191A3] gap-2">
-          <span>Continuous auto-scrolling loop • Hover to pause • Use arrows or touch swipe to navigate</span>
+          <span>Use navigation arrows or touch swipe to browse reviews</span>
           <div className="flex items-center gap-1.5 text-[#D6AA3D]">
             <CheckCircle2 className="w-4 h-4" />
             <span>Verified Communications</span>
