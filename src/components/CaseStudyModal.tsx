@@ -497,68 +497,92 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
               </div>
             )}
 
-            {/* Additional Screenshot Gallery & Mobile Screenshot Placeholders */}
+            {/* All Projects Gallery */}
             <div className="pt-6 border-t border-[#23364A] space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <span className="text-xs uppercase tracking-wider text-[#D6AA3D] font-semibold block">
-                    Additional Project Media & Views
+                  <span className="text-xs uppercase tracking-widest text-[#D6AA3D] font-semibold block">
+                    All Projects Gallery
                   </span>
-                  <h4 className="text-xl font-serif text-[#F4F3EA] mt-1">
-                    Multi-Viewport & Responsive Layouts
+                  <h4 className="text-xl sm:text-2xl font-serif text-[#F4F3EA] mt-1">
+                    Desktop & Mobile Views (All Projects)
                   </h4>
                 </div>
-                <span className="text-xs font-mono text-[#8191A3] px-2.5 py-1 rounded bg-[#071321] border border-[#23364A]">
-                  Desktop & Mobile Slots
+                <span className="text-xs font-mono text-[#8191A3] px-3 py-1 rounded bg-[#071321] border border-[#23364A]">
+                  {PROJECTS_DATA.length} Projects
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Additional Screenshot Gallery */}
-                <div className="p-5 rounded-2xl bg-[#071321] border border-[#23364A] space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-xs font-semibold text-[#F4F3EA]">
-                      <Layers className="w-4 h-4 text-[#D6AA3D]" />
-                      <span>Additional Screenshot Gallery</span>
-                    </div>
-                    <span className="text-[10px] font-mono text-[#D6AA3D] uppercase">Desktop View</span>
-                  </div>
-                  <p className="text-xs text-[#8191A3] leading-relaxed">
-                    Full-length desktop homepage capture for {currentProject.title}.
-                  </p>
-                  <div className="aspect-[16/10] rounded-xl overflow-hidden bg-[#071321] border border-[#23364A]">
-                    <img
-                      src={currentProject.defaultImage}
-                      alt={`${currentProject.title} desktop screenshot`}
-                      className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                </div>
+              {/* 2 columns on desktop, 1 column on mobile */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                {PROJECTS_DATA.map((proj) => {
+                  const mobileSrc = PROJECT_MOBILE_PREVIEWS[proj.id]?.src || proj.defaultImage;
+                  return (
+                    <div
+                      key={proj.id}
+                      onClick={() => onSelectProject(proj.id)}
+                      className="group p-5 rounded-2xl bg-[#071321] border border-[#23364A] hover:border-[#D6AA3D]/60 transition-all duration-300 space-y-4 cursor-pointer shadow-xl flex flex-col justify-between"
+                    >
+                      <div>
+                        {/* Project Header & Name */}
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="text-xs font-mono font-bold text-[#D6AA3D]">
+                            #{proj.number}
+                          </span>
+                          <span className="text-[11px] font-mono text-[#8191A3] uppercase tracking-wider">
+                            {proj.category}
+                          </span>
+                        </div>
 
-                {/* Mobile Screenshot View */}
-                <div className="p-5 rounded-2xl bg-[#071321] border border-[#23364A] space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-xs font-semibold text-[#F4F3EA]">
-                      <Smartphone className="w-4 h-4 text-[#D6AA3D]" />
-                      <span>Mobile Screenshot View</span>
+                        <h5 className="text-xl font-serif text-[#F4F3EA] group-hover:text-[#D6AA3D] transition-colors mb-4">
+                          {proj.title}
+                        </h5>
+
+                        {/* Desktop Screenshot (Cropped to hero section only) */}
+                        <div className="space-y-1.5 mb-4">
+                          <span className="text-[10px] font-mono uppercase tracking-wider text-[#8191A3] block">
+                            Desktop View (Hero Fold)
+                          </span>
+                          <div className="aspect-[16/10] rounded-xl overflow-hidden bg-[#0A1828] border border-[#23364A]">
+                            <img
+                              src={proj.defaultImage}
+                              alt={`${proj.title} desktop preview`}
+                              className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                              loading="lazy"
+                              referrerPolicy="no-referrer"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Mobile Screenshot (Cropped to hero only) */}
+                        <div className="space-y-1.5">
+                          <span className="text-[10px] font-mono uppercase tracking-wider text-[#8191A3] block">
+                            Mobile View (Hero Fold)
+                          </span>
+                          <div className="aspect-[4/5] max-w-[260px] mx-auto rounded-2xl overflow-hidden bg-[#0A1828] border-2 border-[#23364A] p-1.5 shadow-lg">
+                            <div className="w-full h-full rounded-xl overflow-hidden bg-[#071321]">
+                              <img
+                                src={mobileSrc}
+                                alt={`${proj.title} mobile preview`}
+                                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                loading="lazy"
+                                referrerPolicy="no-referrer"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="pt-4 border-t border-[#23364A]/60 flex items-center justify-between text-xs">
+                        <span className="text-[#8191A3] font-medium">Click to view full case study</span>
+                        <span className="inline-flex items-center gap-1 text-[#D6AA3D] font-semibold group-hover:translate-x-1 transition-transform">
+                          <span>Inspect</span>
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                        </span>
+                      </div>
                     </div>
-                    <span className="text-[10px] font-mono text-[#D6AA3D] uppercase">Smartphone Parity</span>
-                  </div>
-                  <p className="text-xs text-[#8191A3] leading-relaxed">
-                    Smartphone responsive view and touch layout for {currentProject.title}.
-                  </p>
-                  <div className="aspect-[16/10] rounded-xl overflow-hidden bg-[#071321] border border-[#23364A] flex items-center justify-center p-2">
-                    <img
-                      src={PROJECT_MOBILE_PREVIEWS[currentProject.id]?.src || currentProject.defaultImage}
-                      alt={`${currentProject.title} mobile screenshot`}
-                      className="max-h-full object-contain rounded-lg hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             </div>
 
