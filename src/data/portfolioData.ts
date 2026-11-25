@@ -150,7 +150,7 @@ export const PROJECTS_DATA: Project[] = [
     number: '01',
     title: 'Practice Work',
     imageKey: 'practice-work-1',
-    defaultImage: '/assets/aistudio/image_87c00a51.png',
+    defaultImage: '/assets/aistudio/image_019e3079.png',
     hasImageAvailable: true,
     hasVideoAvailable: false,
     websiteUrl: 'https://georgecentral.wixstudio.com/',
@@ -934,7 +934,7 @@ export const PROJECT_MOBILE_PREVIEWS: Record<string, { type: 'video' | 'image'; 
   },
   'versatile-pro-junk-solution': {
     type: 'image',
-    src: '/assets/aistudio/image_03eae6e1.png'
+    src: '/assets/aistudio/image_e0fd3ad4.png'
   },
   'valhalla-peptides': {
     type: 'image',
@@ -946,7 +946,7 @@ export const PROJECT_MOBILE_PREVIEWS: Record<string, { type: 'video' | 'image'; 
   },
   'artplay': {
     type: 'image',
-    src: '/assets/aistudio/image_abee3830.png'
+    src: '/assets/aistudio/image_5cbf6241.png'
   },
   'nkd': {
     type: 'image',
@@ -966,7 +966,7 @@ export const PROJECT_MOBILE_PREVIEWS: Record<string, { type: 'video' | 'image'; 
   },
   'pinnacle-electrical-services': {
     type: 'image',
-    src: '/assets/aistudio/image_c2fa290f.png'
+    src: '/assets/aistudio/image_ce67bc6e.png'
   }
 };
 
