@@ -934,7 +934,7 @@ export const PROJECT_MOBILE_PREVIEWS: Record<string, { type: 'video' | 'image'; 
   },
   'versatile-pro-junk-solution': {
     type: 'image',
-    src: '/assets/aistudio/image_e0fd3ad4.png'
+    src: '/assets/aistudio/image_777c7037.png'
   },
   'valhalla-peptides': {
     type: 'image',
